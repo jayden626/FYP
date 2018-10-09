@@ -2,10 +2,12 @@
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 using VRTK;
 
 public class TabletContainerController : MonoBehaviour {
     private VRTK_SnapDropZone parentZone;
+    public PuzzleController puzzleController;
 
     public string correctText;
     public string currentText;
@@ -31,12 +33,15 @@ public class TabletContainerController : MonoBehaviour {
     private void ObjectSnappedToDropZone(object o, SnapDropZoneEventArgs e)
     {
         this.snappedTile = e.snappedObject;
-        this.currentText = e.snappedObject.GetComponentInChildren<TextMeshPro>().text;
+        this.currentText = e.snappedObject.GetComponentInChildren<Text>().text;
+        puzzleController.UpdateMonitor();
     }
 
     private void ObjectUnsnappedFromDropZone(object o, SnapDropZoneEventArgs e)
     {
         this.snappedTile = null;
+        this.currentText = "";
+        puzzleController.UpdateMonitor();
     }
 
     private void OnTriggerEnter(Collider other)

@@ -33,7 +33,7 @@ public class PuzzleController : MonoBehaviour {
         //SetUpPuzzlePunctuationOnOwnTile();
     }
 
-    private void UpdateMonitor()
+    public void UpdateMonitor()
     {
         if(firstZone != null)
         {
@@ -41,15 +41,19 @@ public class PuzzleController : MonoBehaviour {
             GameObject currentZone = firstZone;
             while(currentZone != null)
             {
-                if(currentZone.GetComponent<TabletContainerController>().snappedTile != null && !currentZone.GetComponent<TabletContainerController>().currentText.Equals(";"))
+                TabletContainerController tcc = currentZone.GetComponent<TabletContainerController>();
+                if (currentZone.GetComponent<TabletContainerController>().snappedTile != null)
                 {
-                    text += " ";
+                    //Add a space before words, except after a semi colon
+                    if (!currentZone.GetComponent<TabletContainerController>().currentText.Equals(";"))
+                    {
+                        text += " ";
+                    }
+                    text += currentZone.GetComponent<TabletContainerController>().currentText;
                 }
-                text += currentZone.GetComponent<TabletContainerController>().currentText;
                 currentZone = currentZone.GetComponent<TabletContainerController>().nextSnapZone;
             }
             monitor.GetComponentInChildren<Text>().text = text;
-            print(text);
         }
     }
 
@@ -59,7 +63,6 @@ public class PuzzleController : MonoBehaviour {
         {
             isSolved();
         }
-        UpdateMonitor();
     }
 
     private void ObjectUnsnappedFromDropZone(object o, SnapDropZoneEventArgs e)
@@ -68,7 +71,6 @@ public class PuzzleController : MonoBehaviour {
         {
             e.snappedObject.GetComponent<MeshRenderer>().material.color = Color.white;
         }
-        UpdateMonitor();
     }
 
     public bool isSolved()
@@ -133,6 +135,7 @@ public class PuzzleController : MonoBehaviour {
             }
 
             newSolutionZone.GetComponent<TabletContainerController>().correctText = words[i];
+            newSolutionZone.GetComponent<TabletContainerController>().puzzleController = this;
             newSolutionZone.GetComponent<VRTK_SnapDropZone>().ObjectSnappedToDropZone += ObjectSnappedToDropZone;
             newSolutionZone.GetComponent<VRTK_SnapDropZone>().ObjectUnsnappedFromDropZone += ObjectUnsnappedFromDropZone;
 
@@ -140,26 +143,29 @@ public class PuzzleController : MonoBehaviour {
             {
                 semicolonHit = true;
             }
-            else
+
+            //If it isn't the last word. For the last word, we need to leave it empty (unless no semicolon was seen)
+            if (i < words.Length - 1 || !semicolonHit )
             {
                 GameObject newSolutionTablet = Instantiate(puzzleTile, new Vector3(upperBound.x + (tabletSize.x * xCounter) + (tileSpacing * xCounter),
-                                                                               upperBound.y - (tabletSize.y * yCounter) - (tileSpacing * yCounter),
-                                                                               upperBound.z), Quaternion.identity, this.transform);
-/*                if(semicolonHit && previousSnapZone != null)
-                {
-                    previousSnapZone.GetComponent<VRTK_SnapDropZone>().ForceSnap(newSolutionTablet);
-                }
-                else
-                {
-                }*/
+                                                                                upperBound.y - (tabletSize.y * yCounter) - (tileSpacing * yCounter),
+                                                                                upperBound.z), Quaternion.identity, this.transform);
+
                 newSolutionZone.GetComponent<VRTK_SnapDropZone>().ForceSnap(newSolutionTablet);
-                //newSolutionZone.GetComponent<TabletContainerController>().snappedTile = newSolutionTablet;
 
                 //Set text on both sides of tile
-                TextMeshPro[] textAreas = newSolutionTablet.GetComponentsInChildren<TextMeshPro>();
+                //If we have seen a semicolon, we need to +1 to the word count to skip the semicolon
+                Text[] textAreas = newSolutionTablet.GetComponentsInChildren<Text>();
                 for (int j = 0; j < textAreas.Length; j++)
                 {
-                    textAreas[j].text = words[i];
+                    if (semicolonHit)
+                    {
+                        textAreas[j].text = words[i + 1];
+                    }
+                    else
+                    {
+                        textAreas[j].text = words[i];
+                    }
                 }
             }
 
@@ -172,44 +178,6 @@ public class PuzzleController : MonoBehaviour {
 
             xCounter++;
         }
-        //Push tiles to the left, leaving last tile as empty
-        previousSnapZone.GetComponent<TabletContainerController>().swapTilesLeft();
-
-        /*
-        //If is a punctuation tile, spawn an interactable tile in a SnapDropZone
-        if (Regex.Matches(words[i], @"[;]").Count>0)
-        {
-            GameObject newSolutionZone = Instantiate(solutionSnapDropZone, new Vector3(upperBound.x + (tabletSize.x * xCounter) + (tileSpacing * xCounter),
-                                                                         upperBound.y - (tabletSize.y * yCounter) - (tileSpacing * yCounter),
-                                                                         upperBound.z), Quaternion.identity, this.transform);
-            GameObject newSolutionTablet = Instantiate(puzzleTile, new Vector3(upperBound.x + (tabletSize.x * xCounter) + (tileSpacing * xCounter),
-                                                                         upperBound.y - (tabletSize.y * yCounter) - (tileSpacing * yCounter),
-                                                                         upperBound.z), Quaternion.identity, this.transform);
-            TextMeshPro[] textAreas = newSolutionTablet.GetComponentsInChildren<TextMeshPro>();
-            string tileText = words[i];
-            if( words[i].Equals(";"))
-            {
-                tileText = ".";
-            }
-            for( int j=0; j<textAreas.Length; j++ )
-            {
-                textAreas[j].text = tileText;
-            }
-            newSolutionZone.GetComponent<TabletContainerController>().correctText = words[i];
-            newSolutionZone.GetComponent<VRTK_SnapDropZone>().ObjectSnappedToDropZone += ObjectSnappedToDropZone;
-            newSolutionZone.GetComponent<VRTK_SnapDropZone>().ObjectUnsnappedFromDropZone += ObjectUnsnappedFromDropZone;
-            newSolutionZone.GetComponent<VRTK_SnapDropZone>().ForceSnap(newSolutionTablet);
-        }
-        else
-        {
-            GameObject newTablet = Instantiate(tablet, new Vector3(upperBound.x + (tabletSize.x * xCounter) + (tileSpacing * xCounter),
-                                                                   upperBound.y - (tabletSize.y * yCounter) - (tileSpacing * yCounter),
-                                                                   upperBound.z), Quaternion.identity, this.transform);
-            newTablet.GetComponentInChildren<TextMeshPro>().text = words[i];
-        }
-
-        xCounter++;
-    }*/
     }
 
     //An old version of the puzzle. Each tile is a word or a punctuation, with the punctuation being interactable and their own tile

@@ -21,7 +21,7 @@ GameObject:
   - component: {fileID: 4620223251698884}
   - component: {fileID: 33850530870722740}
   - component: {fileID: 23234917867051488}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: EditorHighlightObject
   m_TagString: Tablet
   m_Icon: {fileID: 0}
@@ -41,7 +41,7 @@ GameObject:
   - component: {fileID: 114131193373464036}
   - component: {fileID: 114721247128425224}
   - component: {fileID: 114468051938796718}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: SolutionSnapDropZone
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -56,7 +56,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 224950671650494624}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: TextMeshPro Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -72,7 +72,7 @@ GameObject:
   m_Component:
   - component: {fileID: 224828928869285626}
   - component: {fileID: 222385185649116472}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: TextMeshPro Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -89,7 +89,7 @@ GameObject:
   - component: {fileID: 4271668352333436}
   - component: {fileID: 33797016364137684}
   - component: {fileID: 23277471320335066}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: HighlightObject
   m_TagString: Tablet
   m_Icon: {fileID: 0}
@@ -104,7 +104,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4032368293215048}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: HighlightContainer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -272,7 +272,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aa31935730602684ca098655260a7c33, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  highlightObjectPrefab: {fileID: 1083069363852492, guid: 221d24eb54fc0af40a56140db209f0bb,
+  highlightObjectPrefab: {fileID: 1281603061116448, guid: b3d4af5b24adda54ca17d445aa99d4ae,
     type: 2}
   snapType: 0
   snapDuration: 0
@@ -296,6 +296,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fc24eff4e0d451540b9ccc41a6fe7376, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  puzzleBoard: {fileID: 0}
   correctText: 
   currentText: 
   snappedTile: {fileID: 0}
