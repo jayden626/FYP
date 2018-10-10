@@ -23,12 +23,14 @@ public class PuzzleController : MonoBehaviour {
     public float tileSpacing = 0.0f;
 
     public bool showSolution;
-
-    public string sentence;
+    public GameObject[] torches;
+    public string[] sentence;
+    private int currentPuzzle;
 
     // Use this for initialization
     void Start()
     {
+        currentPuzzle = 0;
         SetUpSlidingTilePuzzle();
         //SetUpPuzzlePunctuationOnOwnTile();
     }
@@ -75,7 +77,6 @@ public class PuzzleController : MonoBehaviour {
 
     public bool isSolved()
     {
-        showSolution = true;
         bool isCorrect = true;
         VRTK_SnapDropZone[] solutionZones = this.GetComponentsInChildren<VRTK_SnapDropZone>();
         for(int i=0; i<solutionZones.Length; i++)
@@ -95,7 +96,49 @@ public class PuzzleController : MonoBehaviour {
                 tabletContainerController.snappedTile.GetComponent<MeshRenderer>().material.color = Color.red;
             }
         }
+        if(isCorrect)
+        {
+            showSolution = false;
+            DestroyPuzzle();
+            torches[currentPuzzle].GetComponent<TorchController>().EnableTorch();
+            currentPuzzle += 1;
+            if(currentPuzzle < sentence.Length)
+            {
+                SetUpSlidingTilePuzzle();
+            }
+        }
+        else
+        {
+            showSolution = true;
+        }
+
         return isCorrect;
+    }
+
+    public bool isComplete()
+    {
+        isSolved();
+        if(currentPuzzle >= sentence.Length)
+        {
+            return true;
+        }
+        return false;
+    }
+
+    void DestroyPuzzle()
+    {
+        GameObject currentZone = firstZone;
+        firstZone = null;
+        while(currentZone != null)
+        {
+            GameObject nextZone = currentZone.GetComponent<TabletContainerController>().nextSnapZone;
+            GameObject tile = currentZone.GetComponent<TabletContainerController>().snappedTile;
+
+            currentZone.GetComponent<VRTK_SnapDropZone>().ForceUnsnap();
+            Destroy(currentZone.GetComponent<VRTK_SnapDropZone>());
+            Destroy(tile);
+            currentZone = nextZone;
+        }
     }
 
     void SetUpSlidingTilePuzzle()
@@ -110,7 +153,7 @@ public class PuzzleController : MonoBehaviour {
         Transform transform = plane.transform;
 
         //Split sentence and place on board
-        string[] words = Regex.Matches(sentence, @"[\w'.,:?]+|[;]").Cast<Match>().Select(p => p.Value).ToArray();
+        string[] words = Regex.Matches(sentence[currentPuzzle], @"[\w'.,:?]+|[;]").Cast<Match>().Select(p => p.Value).ToArray();
         GameObject previousSnapZone = null;
         bool semicolonHit = false;
         int xCounter = 0;
@@ -193,7 +236,7 @@ public class PuzzleController : MonoBehaviour {
         Transform transform = plane.transform;
 
         //Split sentence and place on board
-        string[] words = Regex.Matches(sentence, @"[\w']+|[.,!?;]").Cast<Match>().Select(p => p.Value).ToArray();
+        string[] words = Regex.Matches(sentence[currentPuzzle], @"[\w']+|[.,!?;]").Cast<Match>().Select(p => p.Value).ToArray();
 
         int xCounter = 0;
         int yCounter = 0;

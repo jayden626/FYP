@@ -11,6 +11,7 @@ public class DoorController : MonoBehaviour {
     public GameObject door;
     public bool doorOpen = false;
     public float doorSpeed = 1;
+    private bool leverReset = true;
 
     protected virtual void OnEnable()
     {
@@ -18,6 +19,7 @@ public class DoorController : MonoBehaviour {
         if (controllable != null)
         {
             controllable.MaxLimitReached += MaxLimitReached;
+            controllable.MinLimitReached += MinLimitReached;
         }
     }
 
@@ -26,22 +28,26 @@ public class DoorController : MonoBehaviour {
         if (controllable != null)
         {
             controllable.MaxLimitReached -= MaxLimitReached;
+            controllable.MinLimitReached -= MinLimitReached;
         }
     }
 
     protected virtual void MaxLimitReached(object sender, ControllableEventArgs e)
     {
-        if( puzzleBoard.GetComponent<PuzzleController>().isSolved() && !doorOpen)
+        if(leverReset && !doorOpen && puzzleBoard.GetComponent<PuzzleController>().isComplete())
         {
             //Open the door
             doorOpen = true;
             StartCoroutine(RotateMe(door.transform, Vector3.up * 100, 0.8f));
         }
-        else
-        {
-            //Return lever to original position
-            this.GetComponent<VRTK_ArtificialRotator>().SetAngleTarget(0.0f, 0.1f);
-        }
+        leverReset = false;
+        //Return lever to original position
+        this.GetComponent<VRTK_ArtificialRotator>().SetAngleTarget(0.0f, 0.1f);
+    }
+
+    protected virtual void MinLimitReached(object sender, ControllableEventArgs e)
+    {
+        leverReset = true;
     }
 
     IEnumerator RotateMe(Transform transform, Vector3 byAngles, float inTime)
