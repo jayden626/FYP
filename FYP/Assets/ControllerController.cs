@@ -23,14 +23,6 @@ public class ControllerController : MonoBehaviour {
         {
             VRTK_SDKManager.instance.scriptAliasLeftController = LeftControllerRaycast;
             VRTK_SDKManager.instance.scriptAliasRightController = RightControllerRaycast;
-            VRTK_PlayerObject[] objects = VRTK_SDKManager.instance.GetComponentsInChildren<VRTK_PlayerObject>( true );
-            for(int i=0; i<objects.Length; i++)
-            {
-                if (objects[i].objectType.Equals("Collider"))
-                {
-                    objects[i].GetComponentInChildren<SphereCollider>().enabled = false;
-                }
-            }
         }
 	}
 	

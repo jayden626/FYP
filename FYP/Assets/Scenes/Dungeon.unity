@@ -1184,6 +1184,51 @@ Transform:
   m_Father: {fileID: 1145048815}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &496150380
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 496150381}
+  - component: {fileID: 496150382}
+  m_Layer: 0
+  m_Name: StepExtender
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &496150381
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 496150380}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -5.4150467, y: -4.380189, z: -2.427063}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1845688979}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &496150382
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 496150380}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9fbab4728a9813b468dd4a65f09e53aa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  activationButton: 0
+  movementFunction: 0
+  additionalMovementMultiplier: 1.5
+  headZoneRadius: 0.1
+  controllerEvents: {fileID: 0}
 --- !u!4 &515088504 stripped
 Transform:
   m_PrefabParentObject: {fileID: 4768370266662500, guid: 7384609b93264d847bad5df740745684,
@@ -1736,8 +1781,8 @@ MonoBehaviour:
     maxAllowedPerFrameAngleDifference: 1.5
   validCollisionColor: {r: 0, g: 1, b: 0, a: 1}
   invalidCollisionColor: {r: 1, g: 0, b: 0, a: 1}
-  tracerVisibility: 0
-  cursorVisibility: 0
+  tracerVisibility: 1
+  cursorVisibility: 1
   maximumLength: 100
   scaleFactor: 0.002
   cursorScaleMultiplier: 25
@@ -4752,6 +4797,7 @@ Transform:
   - {fileID: 587442400}
   - {fileID: 444349377}
   - {fileID: 2058501435}
+  - {fileID: 496150381}
   m_Father: {fileID: 452119885}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -5573,7 +5619,7 @@ MonoBehaviour:
   RightControllerRaycast: {fileID: 769542772}
   LeftControllerHands: {fileID: 2097926655}
   RightControllerHands: {fileID: 1960637005}
-  usingHands: 0
+  usingHands: 1
 --- !u!1001 &2064641345
 Prefab:
   m_ObjectHideFlags: 0
