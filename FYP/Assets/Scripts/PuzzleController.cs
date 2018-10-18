@@ -23,7 +23,7 @@ public class PuzzleController : MonoBehaviour {
     public float tileSpacing = 0.0f;
 
     public bool showSolution;
-    public GameObject[] torches;
+    public GameObject[] indicators;
     public string[] sentence;
     private int currentPuzzle;
 
@@ -100,7 +100,7 @@ public class PuzzleController : MonoBehaviour {
         {
             showSolution = false;
             DestroyPuzzle();
-            torches[currentPuzzle].GetComponent<TorchController>().EnableTorch();
+            indicators[currentPuzzle].GetComponent<Renderer>().material.SetColor( "_Color", Color.green);
             currentPuzzle += 1;
             if(currentPuzzle < sentence.Length)
             {
@@ -153,7 +153,7 @@ public class PuzzleController : MonoBehaviour {
         Transform transform = plane.transform;
 
         //Split sentence and place on board
-        string[] words = Regex.Matches(sentence[currentPuzzle], @"[\w'.,:?]+|[;]").Cast<Match>().Select(p => p.Value).ToArray();
+        string[] words = Regex.Matches(sentence[currentPuzzle], @"[\w'.,:?$!]+|[;]").Cast<Match>().Select(p => p.Value).ToArray();
         GameObject previousSnapZone = null;
         bool semicolonHit = false;
         int xCounter = 0;

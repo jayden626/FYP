@@ -41,8 +41,6 @@ public class DoorController : MonoBehaviour {
             StartCoroutine(RotateMe(door.transform, Vector3.up * 100, 0.8f));
         }
         leverReset = false;
-        //Return lever to original position
-        this.GetComponent<VRTK_ArtificialRotator>().SetAngleTarget(0.0f, 0.1f);
     }
 
     protected virtual void MinLimitReached(object sender, ControllableEventArgs e)
