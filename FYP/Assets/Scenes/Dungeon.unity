@@ -258,7 +258,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 153422415}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -1.137, y: -0.396, z: 1.066}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 766673043}
@@ -537,6 +537,7 @@ MonoBehaviour:
   checkType: 1
   identifiers:
   - Tablet
+  - SolutionTablet
 --- !u!114 &223235563
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -858,6 +859,16 @@ MeshFilter:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 322757489}
   m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &337564951 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1000011125779090, guid: 84c8b8609f9bb434eaf5248f17ff1293,
+    type: 2}
+  m_PrefabInternal: {fileID: 1984010714}
+--- !u!1 &361622217 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1000010482306814, guid: 84c8b8609f9bb434eaf5248f17ff1293,
+    type: 2}
+  m_PrefabInternal: {fileID: 1984010714}
 --- !u!1 &389673364
 GameObject:
   m_ObjectHideFlags: 0
@@ -1287,7 +1298,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   activationButton: 0
   movementFunction: 0
-  additionalMovementMultiplier: 0
+  additionalMovementMultiplier: 1
   headZoneRadius: 0.1
   controllerEvents: {fileID: 0}
 --- !u!4 &515088504 stripped
@@ -1796,6 +1807,7 @@ GameObject:
   - component: {fileID: 769542776}
   - component: {fileID: 769542778}
   - component: {fileID: 769542777}
+  - component: {fileID: 769542779}
   m_Layer: 0
   m_Name: RightController
   m_TagString: Untagged
@@ -1858,8 +1870,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0ec704cceb26f6f49b6c900fc83d8d18, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enableTeleport: 1
-  targetListPolicy: {fileID: 0}
+  enableTeleport: 0
+  targetListPolicy: {fileID: 769542779}
   pointerRenderer: {fileID: 769542774}
   activationButton: 3
   holdButtonToActivate: 1
@@ -1955,6 +1967,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   customColliderContainer: {fileID: 0}
+--- !u!114 &769542779
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 769542772}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2ed2aa1a29b92ca4f84a26a5f6e9218b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  operation: 1
+  checkType: 1
+  identifiers:
+  - SolutionTablet
+  - Lever
 --- !u!1 &801551696
 GameObject:
   m_ObjectHideFlags: 0
@@ -2371,6 +2399,10 @@ Prefab:
     - target: {fileID: 4597085450666690, guid: b3d4af5b24adda54ca17d445aa99d4ae, type: 2}
       propertyPath: m_LocalScale.z
       value: 0.20000024
+      objectReference: {fileID: 0}
+    - target: {fileID: 1281603061116448, guid: b3d4af5b24adda54ca17d445aa99d4ae, type: 2}
+      propertyPath: m_TagString
+      value: SolutionTablet
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: b3d4af5b24adda54ca17d445aa99d4ae, type: 2}
@@ -2962,7 +2994,7 @@ GameObject:
   - component: {fileID: 1091923121}
   m_Layer: 0
   m_Name: Lever
-  m_TagString: Untagged
+  m_TagString: Lever
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3584,15 +3616,15 @@ Prefab:
     m_Modifications:
     - target: {fileID: 400004, guid: 126d619cf4daa52469682f85c1378b4a, type: 2}
       propertyPath: m_LocalPosition.x
-      value: -1.128
+      value: 0.631
       objectReference: {fileID: 0}
     - target: {fileID: 400004, guid: 126d619cf4daa52469682f85c1378b4a, type: 2}
       propertyPath: m_LocalPosition.y
-      value: -0.291
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 400004, guid: 126d619cf4daa52469682f85c1378b4a, type: 2}
       propertyPath: m_LocalPosition.z
-      value: 1.89
+      value: 1.934
       objectReference: {fileID: 0}
     - target: {fileID: 400004, guid: 126d619cf4daa52469682f85c1378b4a, type: 2}
       propertyPath: m_LocalRotation.x
@@ -4120,7 +4152,7 @@ GameObject:
   - component: {fileID: 1757466664}
   m_Layer: 0
   m_Name: LeverControl
-  m_TagString: Untagged
+  m_TagString: Lever
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4713,6 +4745,7 @@ GameObject:
   - component: {fileID: 1956971234}
   - component: {fileID: 1956971236}
   - component: {fileID: 1956971235}
+  - component: {fileID: 1956971237}
   m_Layer: 0
   m_Name: LeftController
   m_TagString: Untagged
@@ -4775,8 +4808,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0ec704cceb26f6f49b6c900fc83d8d18, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enableTeleport: 1
-  targetListPolicy: {fileID: 0}
+  enableTeleport: 0
+  targetListPolicy: {fileID: 1956971237}
   pointerRenderer: {fileID: 1956971232}
   activationButton: 3
   holdButtonToActivate: 1
@@ -4872,6 +4905,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   customColliderContainer: {fileID: 0}
+--- !u!114 &1956971237
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1956971230}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2ed2aa1a29b92ca4f84a26a5f6e9218b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  operation: 1
+  checkType: 1
+  identifiers:
+  - SolutionTablet
+  - Lever
 --- !u!1 &1960637005
 GameObject:
   m_ObjectHideFlags: 0
@@ -5100,6 +5149,10 @@ Prefab:
       propertyPath: StartWithControllers
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 1000011125779090, guid: 84c8b8609f9bb434eaf5248f17ff1293, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 84c8b8609f9bb434eaf5248f17ff1293, type: 2}
   m_IsPrefabParent: 0
@@ -5324,6 +5377,8 @@ MonoBehaviour:
   RightControllerRaycast: {fileID: 769542772}
   LeftControllerHands: {fileID: 2097926655}
   RightControllerHands: {fileID: 1960637005}
+  LeftHandModel: {fileID: 337564951}
+  RightHandModel: {fileID: 361622217}
   usingHands: 0
 --- !u!1001 &2064641345
 Prefab:

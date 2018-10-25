@@ -296,7 +296,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fc24eff4e0d451540b9ccc41a6fe7376, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  puzzleBoard: {fileID: 0}
+  puzzleController: {fileID: 0}
   correctText: 
   currentText: 
   snappedTile: {fileID: 0}
@@ -319,6 +319,7 @@ MonoBehaviour:
   checkType: 1
   identifiers:
   - Tablet
+  - SolutionTablet
 --- !u!135 &135175010410307822
 SphereCollider:
   m_ObjectHideFlags: 1

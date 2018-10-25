@@ -15,6 +15,8 @@ TagManager:
   - Head
   - Solution
   - Teleporter
+  - Lever
+  - SolutionTablet
   layers:
   - Default
   - TransparentFX

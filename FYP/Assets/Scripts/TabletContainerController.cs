@@ -46,7 +46,7 @@ public class TabletContainerController : MonoBehaviour {
 
     private void OnTriggerEnter(Collider other)
     {
-        if (!other.tag.Equals("Tablet"))
+        if (!other.tag.Equals("SolutionTablet"))
         {
             return;
         }
