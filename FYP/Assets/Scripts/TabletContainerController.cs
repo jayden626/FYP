@@ -34,6 +34,10 @@ public class TabletContainerController : MonoBehaviour {
     {
         this.snappedTile = e.snappedObject;
         this.currentText = e.snappedObject.GetComponentInChildren<Text>().text;
+        if( e.snappedObject.tag.Equals("SolutionTablet"))
+        {
+            e.snappedObject.GetComponent<AudioSource>().Play();
+        }
         puzzleController.UpdateMonitor();
     }
 

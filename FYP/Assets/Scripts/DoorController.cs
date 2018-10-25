@@ -34,11 +34,16 @@ public class DoorController : MonoBehaviour {
 
     protected virtual void MaxLimitReached(object sender, ControllableEventArgs e)
     {
-        if(leverReset && !doorOpen && puzzleBoard.GetComponent<PuzzleController>().isComplete())
+        if(leverReset)
         {
-            //Open the door
-            doorOpen = true;
-            StartCoroutine(RotateMe(door.transform, Vector3.up * 100, 0.8f));
+            this.GetComponent<AudioSource>().Play();
+            if(!doorOpen && puzzleBoard.GetComponent<PuzzleController>().isComplete())
+            {
+                //Open the door
+                doorOpen = true;
+                StartCoroutine(RotateMe(door.transform, Vector3.up * 100, 1.5f));
+                door.GetComponent<AudioSource>().Play();
+            }
         }
         leverReset = false;
     }

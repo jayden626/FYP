@@ -25,11 +25,17 @@ public class PuzzleController : MonoBehaviour {
     public bool showSolution;
     public GameObject[] indicators;
     public string[] sentence;
+    public string[] secondSentence;
+    public bool useSecondSentence = false;
     private int currentPuzzle;
 
     // Use this for initialization
     void Start()
     {
+        if(useSecondSentence)
+        {
+            sentence = secondSentence;
+        }
         currentPuzzle = 0;
         SetUpSlidingTilePuzzle();
         //SetUpPuzzlePunctuationOnOwnTile();
