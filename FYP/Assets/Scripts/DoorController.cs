@@ -9,6 +9,7 @@ public class DoorController : MonoBehaviour {
     public VRTK_BaseControllable controllable;
     public GameObject puzzleBoard;
     public GameObject door;
+    public GameObject headsetFade;
     public bool doorOpen = false;
     public float doorSpeed = 1;
     private bool leverReset = true;
@@ -43,6 +44,7 @@ public class DoorController : MonoBehaviour {
                 doorOpen = true;
                 StartCoroutine(RotateMe(door.transform, Vector3.up * 100, 1.5f));
                 door.GetComponent<AudioSource>().Play();
+                headsetFade.GetComponent<VRTK.VRTK_HeadsetFade>().Fade(Color.black, 10f);
             }
         }
         leverReset = false;

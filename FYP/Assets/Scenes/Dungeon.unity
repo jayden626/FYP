@@ -1635,14 +1635,14 @@ MonoBehaviour:
   - {fileID: 1124121436}
   sentence:
   - Birds were nesting; spring had finally arrived.
-  - Books were half price; therefore, we did not feel guilty when we bought 10
-  - The dog played with the kids; he chased the ball for hours. By bedtime, they were
-    all tired but happy.
+  - Parking spaces were hard to get; luckily we found one at the front of the building.
+  - We could catch the train; alternatively, the bus costs about the same. Which do
+    you prefer?
   secondSentence:
   - The picture on the wall looks great; its colours match the rug.
-  - Parking spaces were hard to get; luckily we found one at the front of the building.
-  - Inside the box she saw a blanket; then she noticed a ball of fluff. It was a tiny
-    kitten!
+  - Books were half price; therefore, we did not feel guilty when we bought 10.
+  - My brother fell in the mud at school. He went home to change his clothes; luckily
+    we live nearby.
   useSecondSentence: 1
 --- !u!4 &529921324
 Transform:
@@ -7423,6 +7423,46 @@ Transform:
   m_Father: {fileID: 1052103098}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1480020305
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 1480020306}
+  - component: {fileID: 1480020307}
+  m_Layer: 0
+  m_Name: HeadsetFade
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1480020306
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1480020305}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1845688979}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1480020307
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1480020305}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 44596d094d0946345a7fc6688ba9c06c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1533810218
 Prefab:
   m_ObjectHideFlags: 0
@@ -7827,6 +7867,7 @@ MonoBehaviour:
   controllable: {fileID: 0}
   puzzleBoard: {fileID: 529921322}
   door: {fileID: 1735975343}
+  headsetFade: {fileID: 1480020305}
   doorOpen: 0
   doorSpeed: 1
 --- !u!114 &1757466665
@@ -8128,6 +8169,7 @@ Transform:
   - {fileID: 444349377}
   - {fileID: 2058501435}
   - {fileID: 496150381}
+  - {fileID: 1480020306}
   m_Father: {fileID: 452119885}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -8651,6 +8693,7 @@ GameObject:
   - component: {fileID: 1960637009}
   - component: {fileID: 1960637008}
   - component: {fileID: 1960637007}
+  - component: {fileID: 1960637010}
   m_Layer: 0
   m_Name: RightControllerHands
   m_TagString: Untagged
@@ -8750,6 +8793,24 @@ MonoBehaviour:
   gripSenseAxisChanged: 0
   gripSensePressed: 0
   controllerVisible: 1
+--- !u!114 &1960637010
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1960637005}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 947b27445602ed640b885db7e667dfc1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  grabButton: 7
+  grabPrecognition: 0
+  throwMultiplier: 1.5
+  createRigidBodyWhenNotTouching: 0
+  controllerAttachPoint: {fileID: 0}
+  controllerEvents: {fileID: 0}
+  interactTouch: {fileID: 0}
 --- !u!4 &1971446513
 Transform:
   m_ObjectHideFlags: 0
@@ -8804,7 +8865,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 11437430, guid: 84c8b8609f9bb434eaf5248f17ff1293, type: 2}
       propertyPath: StartWithControllers
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1000011125779090, guid: 84c8b8609f9bb434eaf5248f17ff1293, type: 2}
       propertyPath: m_IsActive
@@ -9094,6 +9155,7 @@ GameObject:
   - component: {fileID: 2097926659}
   - component: {fileID: 2097926658}
   - component: {fileID: 2097926657}
+  - component: {fileID: 2097926660}
   m_Layer: 0
   m_Name: LeftControllerHands
   m_TagString: Untagged
@@ -9193,6 +9255,24 @@ MonoBehaviour:
   gripSenseAxisChanged: 0
   gripSensePressed: 0
   controllerVisible: 1
+--- !u!114 &2097926660
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2097926655}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 947b27445602ed640b885db7e667dfc1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  grabButton: 7
+  grabPrecognition: 0
+  throwMultiplier: 1.5
+  createRigidBodyWhenNotTouching: 0
+  controllerAttachPoint: {fileID: 0}
+  controllerEvents: {fileID: 0}
+  interactTouch: {fileID: 0}
 --- !u!4 &2108733272 stripped
 Transform:
   m_PrefabParentObject: {fileID: 4768370266662500, guid: 7384609b93264d847bad5df740745684,
