@@ -10,6 +10,10 @@ public class ControllerController : MonoBehaviour {
     public GameObject LeftControllerHands;
     public GameObject RightControllerHands;
 
+    public GameObject LeftHandModel;
+    public GameObject RightHandModel;
+
+
     public bool usingHands;
 
     // Use this for initialization
@@ -23,6 +27,8 @@ public class ControllerController : MonoBehaviour {
         {
             VRTK_SDKManager.instance.scriptAliasLeftController = LeftControllerRaycast;
             VRTK_SDKManager.instance.scriptAliasRightController = RightControllerRaycast;
+            LeftHandModel.SetActive(false);
+            RightHandModel.SetActive(false);
         }
 	}
 	
