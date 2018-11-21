@@ -14,6 +14,8 @@ public class DoorController : MonoBehaviour {
     public float doorSpeed = 1;
     private bool leverReset = true;
 
+    public CoinSpawner[] coinSpawner;
+
     protected virtual void OnEnable()
     {
         controllable = (controllable == null ? GetComponent<VRTK_BaseControllable>() : controllable);
@@ -42,9 +44,13 @@ public class DoorController : MonoBehaviour {
             {
                 //Open the door
                 doorOpen = true;
-                StartCoroutine(RotateMe(door.transform, Vector3.up * 100, 1.5f));
+                StartCoroutine(RotateMe(door.transform, Vector3.up * 75, 1.5f));
                 door.GetComponent<AudioSource>().Play();
-                headsetFade.GetComponent<VRTK.VRTK_HeadsetFade>().Fade(Color.black, 10f);
+                for( int i = 0; i<coinSpawner.Length; i++)
+                {
+                    coinSpawner[i].StartCoinSpawning();
+                }
+                Invoke("FadeAndRestart", 60f);
             }
         }
         leverReset = false;
@@ -64,5 +70,16 @@ public class DoorController : MonoBehaviour {
             transform.rotation = Quaternion.Slerp(fromAngle, toAngle, t);
             yield return null;
         }
+    }
+
+    void FadeAndRestart()
+    {
+        headsetFade.GetComponent<VRTK.VRTK_HeadsetFade>().Fade(Color.black, 10f);
+        Invoke("Restart", 10f);
+    }
+
+    void Restart()
+    {
+        UnityEngine.SceneManagement.SceneManager.LoadScene("Dungeon");
     }
 }
